@@ -1,46 +1,43 @@
-import { useSelector } from 'react-redux'
-import { baseImgUrl } from '../constant';
+import { useSelector } from "react-redux";
+import { baseImgUrl } from "../constant";
 const Hero = () => {
-  const state = useSelector((store) => store.movie); 
+  const state = useSelector((store) => store.movie);
 
-  const i = Math.round(Math.random() * state.popularMovies.length)
+  const i = Math.round(Math.random() * state.popularMovies.length);
 
-  const randomMovie= state.popularMovies[i]
+  const randomMovie = state.popularMovies[i];
 
-  console.log(randomMovie)
-    
+  console.log(randomMovie);
+
   return (
-  <div> 
-  {!randomMovie ? (
-    <p>Loading...</p>
-  ) : (
-    <>
-      <div>
-       <h1>{randomMovie.title}</h1>
-       <p>{randomMovie.overview} </p>
-       <p>
-        <span>IMDB: {randomMovie.vote_average} </span>
-        <span></span>
-       </p>
-       <div>
-         <button>Watch The Film</button>
-         <button>Add to the List</button>
-       </div>
-      </div>
+    <div className="hero row p-4">
+      {!randomMovie ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <div className="col-md-6 d-flex flex-column gap-3 align-items-center justify-content-center ">
+            <h1>{randomMovie.title}</h1>
+            <p className="text-start">{randomMovie.overview} </p>
+            <p>
+              <span>IMDB: {randomMovie.vote_average} </span>
+              <span className="text-warning p-x-2"></span>
+            </p>
+            <div className="d-flex gap-3">
+              <button className="btn  btn-danger">Watch The Film</button>
+              <button className="btn btn-info">Add to the List</button>
+            </div>
+          </div>
 
-      <div>
-        <img src= {baseImgUrl + randomMovie.backdrop_path} />
-      </div>
-    </>
+          <div className="col-md-6">
+            <img
+              className="img-fluid rounded shadow my-4"
+              src={baseImgUrl + randomMovie.backdrop_path}
+            />
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
 
-
-  )}
-
-
-  </div>
-
-  )
-  
-}
-
-export default Hero
+export default Hero;
