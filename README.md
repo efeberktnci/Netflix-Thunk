@@ -13,3 +13,5 @@
 - API: https://developer.themoviedb.org/reference/discover-movie
 
 - LOGO: https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.svg
+
+-  Base URL For API Pictures: "https://image.tmdb.org/t/p/original"
