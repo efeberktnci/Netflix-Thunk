@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { baseImgUrl } from "../constant";
+import Loading from "./Loading";
 const Hero = () => {
   const state = useSelector((store) => store.movie);
 
@@ -12,7 +13,7 @@ const Hero = () => {
   return (
     <div className="hero row p-4">
       {!randomMovie ? (
-        <p>Loading...</p>
+        <Loading/>
       ) : (
         <>
           <div className="col-md-6 d-flex flex-column gap-3 align-items-center justify-content-center ">

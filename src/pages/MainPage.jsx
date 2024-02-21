@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { getPopular } from "../Redux/actions/movieActions"
+import { getGenres, getPopular } from "../Redux/actions/movieActions"
 import Hero from "../components/Hero";
 
 
@@ -10,6 +10,8 @@ const MainPage = () => {
 
   useEffect(() => {
     dispatch(getPopular())
+
+    dispatch(getGenres())
   }, []);
 
   return (
