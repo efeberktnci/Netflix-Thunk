@@ -28,16 +28,18 @@ export const getPopular = () => (dispatch) => {
 export const getGenres = () => (dispatch) => {
   dispatch({ type: ActionTypes.SET_GENRES_LOADING });
 
-  axios.get("/genre/movie/list?language=en", options).then((res) =>
-    dispatch({
-      type: ActionTypes.SET_GENRES,
-      payload: res.data.genres,
+  axios
+    .get("/genre/movie/list?language=en", options)
+    .then((res) => {
+      dispatch({
+        type: ActionTypes.SET_GENRES,
+        payload: res.data.genres,
+      });
     })
-  )
-  .catch((err) => 
-  dispatch({
-    type: ActionTypes.SET_GENRES_ERROR,
-    payload: err.message,
-  })
-  )
+    .catch((err) =>
+      dispatch({
+        type: ActionTypes.SET_GENRES_ERROR,
+        payload: err.message,
+      })
+    );
 };

@@ -7,9 +7,7 @@ const Hero = () => {
   const i = Math.round(Math.random() * state.popularMovies.length);
 
   const randomMovie = state.popularMovies[i];
-
-  console.log(randomMovie);
-
+  
   return (
     <div className="hero row p-4">
       {!randomMovie ? (

@@ -17,7 +17,7 @@ const genreReducer = (state = initialState, { type, payload }) => {
     case ActionTypes.SET_GENRES:
       return {
         ...state,
-        isloading: false,
+        isLoading: false,
         isError: false,
         genres: payload,
       };
