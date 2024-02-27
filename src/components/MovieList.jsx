@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect , useState } from "react";
-import { options } from "../constant";
+import { baseImgUrl, options } from "../constant";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { Link } from "react-router-dom";
 import "@splidejs/react-splide/css";
 
 const MovieList = ({ genre }) => {
@@ -13,20 +14,27 @@ const MovieList = ({ genre }) => {
         `https://api.themoviedb.org/3/discover/movie?with_genres=${genre.id}`,
         options
       )
-      .then((res) => console.log(res.data.results));
+      .then((res) => setMovies(res.data.results));
   }, []);
 
   return (
-    <div>
-      <h2> {genre.name} </h2>
+    <div className="p-4">
+      <h1 className="mb-3" > {genre.name} </h1>
 
-      <Splide>
-        <SplideSlide>
-          <img src="image1.pjg" alt="Image 1" />
-        </SplideSlide>
-        <SplideSlide>
-          <img src="image2.pjg" alt="Image 2" />
-        </SplideSlide>
+      <Splide options={{
+        autoWidth: true,
+        rewind: true,
+        gap: "10px",
+        pagination: false,
+      }}>
+       {movies?.map((movie) => (
+          <SplideSlide>
+            <Link to={`/detay/${movie.id}`} >
+            <img className="movie" src={baseImgUrl + movie.poster_path}/>
+            </Link>
+          </SplideSlide>
+        ))
+       }
       </Splide>
     </div>
   );
