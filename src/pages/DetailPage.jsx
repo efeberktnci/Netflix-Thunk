@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { baseImgUrl, options } from "../constant";
+import millify from "millify"
 
 const DetailPage = () => {
   const [movie, setMovie] = useState(null);
@@ -32,50 +33,70 @@ const DetailPage = () => {
             <div className="banner-bg">
               <span>{movie.title}</span>
             </div>
-          </div>
 
-          <div className="col-md-6 mt-4 p-4">
-            {/* 1) Producer Companies */}
-            <h3>Producer Companies</h3>
+            <div className="col-md-6 mt-4 p-4">
+              {/* 1) Producer Companies */}
+              <h3 className="mt-4">Producer Companies</h3>
 
-            <div className="d-flex flax-wrap gap-4">
-              {movie.production_companies.map((i) => (
-                <div className="bg-white rounded p-2 d-flex align-items-center">
-                  {i.logo_path ? (
-                    <img
-                      className="object-fit-contain"
-                      width={100}
-                      height={40}
-                      src={baseImgUrl + i.logo_path}
-                    />
-                  ) : (
+              <div className="d-flex flax-wrap gap-4">
+                {movie.production_companies.map((i) => (
+                  <div className="bg-white rounded p-2 d-flex align-items-center">
+                    {i.logo_path ? (
+                      <img
+                        className="object-fit-contain"
+                        width={100}
+                        height={40}
+                        src={baseImgUrl + i.logo_path}
+                      />
+                    ) : (
+                      <span className="company">{i.name}</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* 2) Languages */}
+              <h3 className="mt-4">Spoken Languages</h3>
+
+              <div className="d-flex flax-wrap gap-4">
+                {movie.spoken_languages.map((i) => (
+                  <div className="bg-white rounded p-2 d-flex align-items-center">
                     <span className="company">{i.name}</span>
-                  )}
-                </div>
-              ))}
+                  </div>
+                ))}
+              </div>
+
+              {/* 3) Producer Countries*/}
+
+              <h3 className="mt-4">Producer Countries</h3>
+
+              <div className="d-flex flax-wrap gap-4">
+                {movie.production_countries.map((i) => (
+                  <div className="bg-white rounded p-2 d-flex align-items-center">
+                    <span className="company">{i.name}</span>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* 2) Languages */}
-            <h3>Spoken Languages</h3>
+            <div className="col-md-6 mt-4 p-4">
+              {/* 1) Overview */}
 
-            <div className="d-flex flax-wrap gap-4">
-              {movie.spoken_languages.map((i) => (
-                <div className="bg-white rounded p-2 d-flex align-items-center">
-                    <span className="company">{i.name}</span>
-                </div>
-              ))}
-            </div>
+              <p className="lead">{movie.overview} </p>
 
-            {/* 3) Producer Countries*/}
+              {/* 2) Budget */}
 
-            <h3>Producer Countries</h3>
+              <p>
+                <span className="fw-bold">Budget </span>:
+                <span className="text-success"> {millify(movie.budget)} $ </span>
+              </p>
 
-            <div className="d-flex flax-wrap gap-4">
-              {movie.production_companies.map((i) => (
-                <div className="bg-white rounded p-2 d-flex align-items-center">
-                    <span className="company">{i.name}</span>
-                </div>
-              ))}
+              {/* 3) Revenue */}
+
+              <p>
+                <span className="fw-bold">Revenue </span>:
+                <span className="text-success"> {millify(movie.revenue)} $</span>
+              </p>
             </div>
           </div>
         </>
