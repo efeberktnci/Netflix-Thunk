@@ -8,8 +8,6 @@ const DetailPage = () => {
 
   const { id } = useParams();
 
-  console.log(id);
-
   useEffect(() => {
     axios
       .get(
@@ -19,26 +17,46 @@ const DetailPage = () => {
       .then((res) => setMovie(res.data));
   }, []);
 
+  console.log(movie);
   return (
-    <div className="row" >
+    <div className="row">
       {!movie ? (
         <div class="spinner-border text-primary" role="status"></div>
       ) : (
         <>
-          <div className="col-12 banner" >
-            <img 
-            className="w-100 h-100 object-fit-cover" 
-            src={baseImgUrl+ movie.backdrop_path} 
+          <div className="col-12 banner">
+            <img
+              className="w-100 h-100 object-fit-cover"
+              src={baseImgUrl + movie.backdrop_path}
             />
-            <div className="banner-bg" >
+            <div className="banner-bg">
               <span>{movie.title}</span>
             </div>
+          </div>
 
+          <div className="col-md-6 mt-4 p-4">
+            <h3>Producer Companies</h3>
+
+            <div className="d-flex flax-wrap gap-4">
+              {movie.production_companies.map((i) => (
+                <div className="bg-white rounded p-2 d-flex align-items-center">
+                  {i.logo_path ? (
+                    <img
+                      className="object-fit-contain"
+                      width={100}
+                      height={40}
+                      src={baseImgUrl + i.logo_path}
+                    />
+                  ) : (
+                    <span className="company">{i.name}</span>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </>
       )}
     </div>
-   
   );
 };
 
