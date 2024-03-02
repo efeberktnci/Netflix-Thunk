@@ -2,7 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { baseImgUrl, options } from "../constant";
-import millify from "millify"
+import millify from "millify";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css";
 
 const DetailPage = () => {
   const [movie, setMovie] = useState(null);
@@ -86,17 +88,56 @@ const DetailPage = () => {
 
               {/* 2) Budget */}
 
-              <p>
+              <p className="fs-5">
                 <span className="fw-bold">Budget </span>:
-                <span className="text-success"> {millify(movie.budget)} $ </span>
+                <span className="text-success">
+                  {" "}
+                  {millify(movie.budget)} ${" "}
+                </span>
               </p>
 
               {/* 3) Revenue */}
 
-              <p>
+              <p className="fs-5">
                 <span className="fw-bold">Revenue </span>:
-                <span className="text-success"> {millify(movie.revenue)} $</span>
+                <span className="text-success">
+                  {" "}
+                  {millify(movie.revenue)} $
+                </span>
               </p>
+            </div>
+
+            <div className="col-12 p-4 my-3">
+              <h2>Oyuncular</h2>
+
+              <Splide
+                options={{
+                  height: "200px",
+                  gap: "",
+                  pagination: false,
+                  autoWidth: true,
+                }}
+              >
+                {movie.credits.cast.map((i) => (
+                  <SplideSlide>
+                    <div className="actor-card h-100">
+                      <img
+                        className="movie"
+                        src={
+                          i.profile_path
+                            ? baseImgUrl + i.profile_path
+                            : "/default.png"
+                        }
+                      />
+
+                      <p>
+                        <span>{i.character}</span>
+                        <span>{i.name}</span>
+                      </p>
+                    </div>
+                  </SplideSlide>
+                ))}
+              </Splide>
             </div>
           </div>
         </>
