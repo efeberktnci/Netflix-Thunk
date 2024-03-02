@@ -107,8 +107,10 @@ const DetailPage = () => {
               </p>
             </div>
 
+            {/* 4) Actors */}
+
             <div className="col-12 p-4 my-3">
-              <h2>Oyuncular</h2>
+              <h2>Actors</h2>
 
               <Splide
                 options={{
@@ -126,7 +128,7 @@ const DetailPage = () => {
                         src={
                           i.profile_path
                             ? baseImgUrl + i.profile_path
-                            : "/default.png"
+                            : "/default.jpg"
                         }
                       />
 
@@ -138,6 +140,18 @@ const DetailPage = () => {
                   </SplideSlide>
                 ))}
               </Splide>
+            </div>
+
+            {/* 5) Videos */}
+            <div>
+              {movie.videos.results.map((video) => (
+                <iframe
+                  key={video.key} // Don't forget to add a unique key prop when rendering elements in a loop
+                  width="420"
+                  height="315"
+                  src={`https://www.youtube.com/embed/${video.key}`}
+                ></iframe>
+              ))}
             </div>
           </div>
         </>
